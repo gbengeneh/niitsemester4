@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+    <Appenders>
+        <!-- Console Appender -->
+        <Console name="Console" target="SYSTEM_OUT">
+            <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+        </Console>
+
+        <!-- File Appender -->
+        <File name="File" fileName="logs/app.log">
+            <PatternLayout pattern="%d{ISO8601} [%t] %-5p %c{1} - %m%n"/>
+        </File>
+
+        <!-- Rolling File Appender -->
+        <!--<RollingFile name="RollingFile"
+                     fileName="logs/app.log"
+                     filePattern="logs/app-%d{yyyy-MM-dd}-%i.log.gz">
+            <PatternLayout pattern="%d{ISO8601} [%t] %-5p %c{1} - %m%n"/>
+            <Policies>
+                &lt;!&ndash; Rollover when file exceeds 10 MB &ndash;&gt;
+                <SizeBasedTriggeringPolicy size="1KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>-->
+        <!-- Routing Appender (per class) -->
+        <!-- Routing Appender (safe dynamic class-based routing) -->
+        <!-- Routing Appender -->
+        <!-- Routing appender: resolves logClass at runtime -->
+        <!-- Routing Appender -->
+        <!-- Routing appender with script -->
+       <!-- <RollingFile name="CustomerControllerAppender"
+                     fileName="logs/customercontroller.log"
+                     filePattern="logs/customercontroller-%d{yyyy-MM-dd-HH-mm-ss}.log.gz">
+            <PatternLayout pattern="%d [%t] %-5p %c{1} - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>
+
+        <RollingFile name="CustomerServiceAppender"
+                     fileName="logs/customerservice.log"
+                     filePattern="logs/customerservice-%d{yyyy-MM-dd-HH-mm-ss}.log.gz">
+            <PatternLayout pattern="%d [%t] %-5p %c{1} - %m%n"/>
+            <Policies>
+                <SizeBasedTriggeringPolicy size="1KB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="5"/>
+        </RollingFile>-->
+    </Appenders>
+
+    <Loggers>
+        <Root level="info">
+            <AppenderRef ref="Console"/>
+            <AppenderRef ref="File"/>
+
+        </Root>
+        <!--<Logger name="com.siemens.customerservice.controllers.CustomerController" level="info" additivity="false">
+            <AppenderRef ref="CustomerControllerAppender"/>
+        </Logger>
+
+        <Logger name="com.siemens.customerservice.services.GenericServiceImpl" level="warn" additivity="false">
+            <AppenderRef ref="CustomerServiceAppender"/>
+
+        </Logger>-->
+    </Loggers>
+</Configuration>

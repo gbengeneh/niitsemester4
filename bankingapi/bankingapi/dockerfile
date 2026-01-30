@@ -1,0 +1,12 @@
+FROM jelastic/maven:3.9.5-openjdk-21  AS build
+WORKDIR /
+COPY src src
+COPY pom.xml pom.xml
+RUN mvn clean install -Dmaven.test.skip=true
+
+FROM openjdk:21-jdk
+LABEL "com.db.bankingapi"="bankingapi"
+LABEL version=1.0-SNAPSHOT
+COPY --from=build target/bankingapi-0.0.1-SNAPSHOT.jar bankingapi-0.0.1-SNAPSHOT.jar
+EXPOSE 7074
+ENTRYPOINT ["java","-jar","bankingapi-0.0.1-SNAPSHOT.jar"]
