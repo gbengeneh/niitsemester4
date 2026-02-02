@@ -1,0 +1,20 @@
+# Default configuration for all services
+spring:
+  application:
+    name: default-application
+
+# Common actuator configuration
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: always
+
+# Common logging configuration
+logging:
+  level:
+    root: INFO
+    org.springframework: INFO
