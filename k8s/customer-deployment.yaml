@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: customer-api
-        image: yourdockerhub/customer_api:latest
+        image: gbenga12/customer_api:latest
         imagePullPolicy: Always
         ports:
         - containerPort: 7074
