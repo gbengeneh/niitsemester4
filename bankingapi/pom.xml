@@ -125,18 +125,18 @@
 			<artifactId>nashorn-core</artifactId>
 			<version>15.4</version>
 		</dependency>
-	<!--	<dependency>
+	<dependency>
 			<groupId>de.codecentric</groupId>
 			<artifactId>spring-boot-admin-starter-server</artifactId>
 			<version>3.3.4</version>
-		</dependency>-->
+		</dependency>
 		<!-- Micrometer Tracing (Brave bridge for Zipkin) -->
-		<!--<dependency>
+		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-tracing-bridge-brave</artifactId>
 		</dependency>
 
-		&lt;!&ndash; Zipkin Reporter &ndash;&gt;
+		<!-- &lt;!&ndash; Zipkin Reporter &ndash;&gt; -->
 		<dependency>
 			<groupId>io.zipkin.reporter2</groupId>
 			<artifactId>zipkin-reporter-brave</artifactId>
@@ -145,12 +145,12 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
 		</dependency>
-		&lt;!&ndash;security&ndash;&gt;
+		<!-- &lt;!&ndash;security&ndash;&gt; -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-		&lt;!&ndash; jwt &ndash;&gt;
+		<!-- &lt;!&ndash; jwt &ndash;&gt; -->
 		<dependency>
 			<groupId>io.jsonwebtoken</groupId>
 			<artifactId>jjwt</artifactId>
@@ -160,7 +160,7 @@
 			<groupId>javax.xml.bind</groupId>
 			<artifactId>jaxb-api</artifactId>
 			<version>2.3.1</version>
-		</dependency>-->
+		</dependency>
 		<dependency>
 			<groupId>com.github.javafaker</groupId>
 			<artifactId>javafaker</artifactId>
