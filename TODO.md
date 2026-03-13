@@ -44,10 +44,15 @@
 - [x] Add routes for banking-api
 
 ## 7. Testing (Next Steps)
-- [ ] Build infrastructure services (config, eureka, gateway)
-- [ ] Build customer_api and bankingapi
-- [ ] Verify both services register with Eureka
-- [ ] Test API Gateway routing to both services
+- [x] Build infrastructure services (config, eureka, gateway)
+- [x] Build customer_api and bankingapi  
+- [x] Verify both services register with Eureka
+- [x] Test API Gateway routing to both services
+
+## 8. CI/CD - Jenkins Pipeline ✅
+- [x] Added Jenkinsfile (api-gateway + customer_api: Maven → Docker → k8s)
+- [x] README-JENKINS.md (setup guide)
+- See README.md → Development → CI/CD section
 
 ## Commands to Run:
 

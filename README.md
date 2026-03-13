@@ -126,6 +126,13 @@ cd customer_api && docker-compose logs -f
 cd bankingapi && docker-compose logs -f
 ```
 
+### CI/CD with Jenkins
+✅ **Jenkins Pipeline added!**
+
+See [README-JENKINS.md](README-JENKINS.md) for:
+- Root `Jenkinsfile`: Build/test/Docker/k8s-deploy for api-gateway & customer_api
+- Setup guide, params (REGISTRY_URL, IMAGE_TAG), credentials
+
 ### Stop Services
 ```bash
 # Windows

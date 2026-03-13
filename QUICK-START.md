@@ -133,6 +133,9 @@ netstat -ano | findstr :8080
 lsof -i :8080
 ```
 
+### 🚀 CI/CD - Jenkins Pipeline Added!
+See [README-JENKINS.md](README-JENKINS.md) for production-ready pipeline!
+
 ### Service Not Registering with Eureka
 1. Check Eureka is running: http://localhost:8761
 2. Wait 30-60 seconds for registration
