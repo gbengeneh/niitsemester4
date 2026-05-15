@@ -4,13 +4,16 @@ pipeline {
     parameters {
         string(name: 'REGISTRY_URL', defaultValue: 'docker.io/gbenga12', description: 'Docker registry URL')
         string(name: 'IMAGE_TAG', defaultValue: "build-${BUILD_NUMBER}", description: 'Image tag')
-        string(name: 'KUBE_NAMESPACE', defaultValue: 'default', description: 'Kubernetes namespace')
+        string(name: 'KUBE_NAMESPACE', defaultValue: 'student-app', description: 'Kubernetes namespace')
         choice(name: 'DEPLOY_ENV', choices: ['dev', 'staging', 'prod'], description: 'Deployment environment')
     }
     
     environment {
         DOCKER_CREDENTIALS = credentials('docker-hub-credentials')
         SERVICES = "api-gateway customer_api"
+        HELM_CHART_DIR = 'helm/student-app'
+        HELM_PACKAGE_DIR = 'dist/helm'
+        HELM_RELEASE = 'student-app'
     }
     
     stages {
@@ -97,25 +100,43 @@ pipeline {
             }
         }
 
-        stage('Deploy to Kubernetes') {
+        stage('Helm Lint & Package') {
             agent {
                 docker {
-                    image 'bitnami/kubectl:latest'
+                    image 'alpine/helm:3.15.4'
+                    args '-v $WORKSPACE:$WORKSPACE -w $WORKSPACE'
+                }
+            }
+            steps {
+                sh """
+                    mkdir -p ${HELM_PACKAGE_DIR}
+                    helm lint ${HELM_CHART_DIR}
+                    helm package ${HELM_CHART_DIR} --destination ${HELM_PACKAGE_DIR}
+                """
+            }
+            post {
+                success {
+                    archiveArtifacts artifacts: "${HELM_PACKAGE_DIR}/*.tgz", fingerprint: true
+                }
+            }
+        }
+
+        stage('Deploy to Kubernetes with Helm') {
+            agent {
+                docker {
+                    image 'alpine/helm:3.15.4'
                     args '-v $HOME/.kube:/root/.kube'
                 }
             }
             steps {
                 withKubeConfig([credentialsId: 'kubeconfig']) {
                     sh """
-                        echo "Updating Kubernetes manifests..."
-
-                        # Update only specific deployments safely
-                        sed -i 's|image:.*api-gateway.*|image: ${params.REGISTRY_URL}/api-gateway:${params.IMAGE_TAG}|g' k8s/gateway-deployment.yaml
-                        sed -i 's|image:.*customer-api.*|image: ${params.REGISTRY_URL}/customer-api:${params.IMAGE_TAG}|g' k8s/customer-deployment.yaml
-
-                        kubectl apply -f k8s/ -n ${params.KUBE_NAMESPACE}
-                        kubectl rollout status deployment/api-gateway -n ${params.KUBE_NAMESPACE}
-                        kubectl rollout status deployment/customer-api -n ${params.KUBE_NAMESPACE}
+                        helm upgrade --install ${HELM_RELEASE} ${HELM_CHART_DIR} \
+                          --namespace ${params.KUBE_NAMESPACE} \
+                          --create-namespace \
+                          --wait \
+                          --set global.imageRegistry=${params.REGISTRY_URL} \
+                          --set global.imageTag=${params.IMAGE_TAG}
                     """
                 }
             }

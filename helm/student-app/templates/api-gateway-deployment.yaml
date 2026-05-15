@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-gateway
+  labels:
+    app: api-gateway
+    {{- include "student-app.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.apiGateway.replicaCount }}
+  selector:
+    matchLabels:
+      app: api-gateway
+      {{- include "student-app.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: api-gateway
+        {{- include "student-app.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: api-gateway
+          image: {{ include "student-app.apiGatewayImage" . }}
+          imagePullPolicy: {{ .Values.apiGateway.image.pullPolicy }}
+          ports:
+            - containerPort: {{ .Values.apiGateway.service.targetPort }}

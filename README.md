@@ -130,8 +130,20 @@ cd bankingapi && docker-compose logs -f
 ✅ **Jenkins Pipeline added!**
 
 See [README-JENKINS.md](README-JENKINS.md) for:
-- Root `Jenkinsfile`: Build/test/Docker/k8s-deploy for api-gateway & customer_api
+- Root `Jenkinsfile`: Build/test/Docker/Helm deploy for api-gateway & customer_api
 - Setup guide, params (REGISTRY_URL, IMAGE_TAG), credentials
+
+### Helm Packaging
+The repo now includes a Helm chart at `helm/student-app` for packaging and deploying:
+- `api-gateway`
+- `customer-api`
+- `postgres`
+
+Package locally with:
+```bash
+helm lint helm/student-app
+helm package helm/student-app --destination dist/helm
+```
 
 ### Stop Services
 ```bash

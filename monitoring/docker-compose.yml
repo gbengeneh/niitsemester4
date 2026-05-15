@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # ===============================
   # CUSTOMER API (Your App)
@@ -61,6 +59,7 @@ services:
       - grafana_data:/var/lib/grafana
     networks:
       - monitoring
+    
 
   # ===============================
   # NODE EXPORTER
