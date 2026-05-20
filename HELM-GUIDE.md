@@ -173,9 +173,12 @@ Helm sends the rendered resources to Kubernetes.
 ### 1. Make sure Helm is installed
 
 ```bash
+choco install kubernetes-helm
+```
+### Then confirm
+```bash
 helm version
 ```
-
 ### 2. Move into the project root
 
 ```bash
