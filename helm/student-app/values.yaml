@@ -26,7 +26,7 @@ apiGateway:
 customerApi:
   replicaCount: 3
   image:
-    repository: customer-api
+    repository: customerapi
     pullPolicy: Always
   service:
     type: ClusterIP

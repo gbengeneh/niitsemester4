@@ -211,11 +211,13 @@ dist/helm/student-app-0.1.0.tgz
 ```
 
 ### 6. Install the chart
-
+### if namespace gives error use 
 ```bash
-helm install student-app helm/student-app \
-  --namespace student-app \
-  --create-namespace
+kubectl delete namespace student-app
+```
+```bash
+ 
+helm install student-app helm/student-app --namespace student-app --create-namespace
 ```
 
 ### 7. Upgrade the chart
