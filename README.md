@@ -73,6 +73,7 @@ You should see `CUSTOMER_API` and `BANKINGAPI` registered.
 - **[Complete Setup Guide](MICROSERVICES-SETUP-GUIDE.md)** - Detailed setup instructions
 - **[Setup Summary](COMPLETE-SETUP-SUMMARY.md)** - What has been configured
 - **[Infrastructure Guide](README-DOCKER.md)** - Infrastructure services details
+- **[AWS Deployment Roadmap](AWS-COMPLETE-DEPLOYMENT-ROADMAP.md)** - Full AWS path from account setup to monitoring and MobaXterm access
 
 ## 🔗 Service URLs
 
